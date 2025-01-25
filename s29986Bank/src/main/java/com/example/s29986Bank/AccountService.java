@@ -29,10 +29,10 @@ public class AccountService {
         double balance = accountStorage.getAccount(id).getBalance();
         if (!Double.isNaN(amount) && balance >= amount) {
             accountStorage.getAccount(id).setBalance(balance - amount);
-            System.out.println("Transfer successful, balance: " + balance);
+            System.out.println("Transfer successful, balance: " + accountStorage.getAccount(id).getBalance());
             return Status.ACCEPTED;
         } else {
-            System.out.println("Transfer failed, balance: " + balance);
+            System.out.println("Transfer failed, balance: " + accountStorage.getAccount(id).getBalance());
             return Status.DECLINED;
         }
     }
@@ -46,15 +46,19 @@ public class AccountService {
         double balance = accountStorage.getAccount(id).getBalance();
         if (!Double.isNaN(amount)) {
             accountStorage.getAccount(id).setBalance(balance + amount);
-            System.out.println("Deposit successful, balance: " + balance);
+            System.out.println("Deposit successful, balance: " + accountStorage.getAccount(id).getBalance());
             return Status.ACCEPTED;
         } else {
-            System.out.println("Deposit failed, balance: " + balance);
+            System.out.println("Deposit failed, balance: " + accountStorage.getAccount(id).getBalance());
             return Status.DECLINED;
         }
     }
 
     public void listAccountInfo(int id) {
-        accountStorage.getAccount(id);
+        if (accountStorage.getAccount(id) != null) {
+            System.out.println(accountStorage.getAccount(id));
+        } else {
+            System.out.println("Account is not registered in this bank.");
+        }
     }
 }
